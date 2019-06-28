@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/status-liked', function () {
+    event(new App\Events\StatusLiked('Someone'));
+    return 'Event launched!';
+});
