@@ -1,5 +1,11 @@
 <?php
 
+use App\User;
+use App\Events\StatusLiked as StatusLikingEvent;
+use App\Notifications\StatusLiked as StatusLikingNotif;
+use Faker\Generator as Faker;
+use Illuminate\Support\Facades\Notification;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +21,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/status-liked', function () {
-    event(new App\Events\StatusLiked('Someone'));
-    return 'Event launched!';
+Route::get('/portfolio', function () {
+    return view('portfolio');
+});
+
+Route::prefix('admin')->group(function () {
+    Route::get('/', function () { return view('sb-admin.dashboard'); });
+    // Route::get('/', function () { });
+    // Route::get('/', function () { });
+    // Route::get('/', function () { });
+    // Route::get('/', function () { });
+});
+
+Route::get('/status-liked', function (Faker $faker) {
+    // send real-time notification
+    event(new StatusLikingEvent($faker->firstName));
+
+    // send email notification
+    Notification::send(User::find(1), new StatusLikingNotif());
+
+    return view('event-launched');
 });

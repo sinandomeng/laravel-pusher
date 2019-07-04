@@ -35,4 +35,14 @@ class StatusLiked implements ShouldBroadcast
     {
         return ['status-liked'];
     }
+
+    /**
+     * Set event a generic name.
+     *
+     * @return Name|string
+     */
+    public function broadcastAs()
+    {
+        return 'status-liked';
+    }
 }
