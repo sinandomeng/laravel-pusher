@@ -18,18 +18,19 @@ use Illuminate\Support\Facades\Notification;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('filipay');
+});
+
+Route::get('/pusher', function () {
+    return view('pusher');
 });
 
 Route::get('/portfolio', function () {
-    return view('portfolio');
+    return view('portfolio.index');
 });
 
 Route::prefix('admin')->group(function () {
-    Route::get('/', function () { return view('sb-admin.dashboard'); });
-    // Route::get('/', function () { });
-    // Route::get('/', function () { });
-    // Route::get('/', function () { });
+    Route::get('/', function () { return view('admin.dashboard'); });
     // Route::get('/', function () { });
 });
 

@@ -11,12 +11,12 @@
     <title>Freelancer - Start Bootstrap Theme</title>
 
     <!-- Custom fonts for this theme -->
-    <link href="vendor/portfolio/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ url('vendor/portfolio/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400,700" rel="stylesheet" type="text/css">
 
     <!-- Theme CSS -->
-    <link href="vendor/portfolio/css/freelancer.min.css" rel="stylesheet">
+    <link href="{{ url('vendor/portfolio/css/freelancer.min.css') }}" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -576,18 +576,18 @@
     </div>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/portfolio/vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/portfolio/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url('vendor/portfolio/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url('vendor/portfolio/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="vendor/portfolio/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="{{ url('vendor/portfolio/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
     <!-- Contact Form JavaScript -->
-    <script src="vendor/portfolio/js/jqBootstrapValidation.js"></script>
-    <script src="vendor/portfolio/js/contact_me.js"></script>
+    <script src="{{ url('vendor/portfolio/js/jqBootstrapValidation.js') }}"></script>
+    <script src="{{ url('vendor/portfolio/js/contact_me.js') }}"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="vendor/portfolio/js/freelancer.min.js"></script>
+    <script src="{{ url('vendor/portfolio/js/freelancer.min.js') }}"></script>
 
 </body>
 
