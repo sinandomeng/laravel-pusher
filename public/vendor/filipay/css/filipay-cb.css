@@ -1,0 +1,240 @@
+html,
+body {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background: url(/images/dashboard-bg.png?1c9d99c2c10549eb827fcad9c890b7c6) center center no-repeat;
+  width: 100%;
+  height: 100%;
+}
+
+.bot-toggler,
+.bot-wrapper {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 100%;
+  height: 100%;
+  max-width: 80px;
+  max-height: 80px;
+  background-color: #f5f5f5;
+  border-radius: 100%;
+  transition: all 300ms ease-in-out;
+}
+
+.bot-toggler.open,
+.bot-wrapper.open {
+  border-radius: 10px !important;
+  max-width: 400px;
+  max-height: 800px;
+}
+
+.bot-toggler {
+  cursor: pointer;
+  z-index: 2;
+}
+
+.bot-toggler.open {
+  z-index: 1;
+}
+
+.bot-wrapper {
+  cursor: default;
+  z-index: 1;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.bot-wrapper .bot-header {
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
+  transition-delay: none;
+  background: #1cbbb4;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.bot-wrapper .bot-header .bot-logo {
+  width: 100px;
+  height: auto;
+}
+
+.bot-wrapper .bot-header .bot-heading {
+  color: #ffffff;
+}
+
+.bot-wrapper .bot-header .bot-heading .bot-title {
+  margin-bottom: 5px;
+}
+
+.bot-wrapper .bot-header .bot-heading .bot-sub-title {
+  font-size: 12px;
+  margin-bottom: 0px;
+}
+
+.bot-wrapper .bot-header .bot-close {
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #ffffff;
+  font-size: 25px;
+}
+
+.bot-wrapper .bot-body {
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
+  transition-delay: none;
+  width: 100%;
+  height: 100%;
+  background-color: #eee;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.bot-wrapper .bot-body .bot-bubble {
+  margin: 4px;
+  max-width: 75%;
+  color: #ffffff;
+  display: flex;
+  align-items: flex-start;
+}
+
+.bot-wrapper .bot-body .bot-bubble.bot-message {
+  text-align: left;
+  float: left;
+  clear: both;
+}
+
+.bot-wrapper .bot-body .bot-bubble.bot-message .content {
+  margin-top: 10px;
+  margin-left: 15px;
+  padding: 10px 15px;
+  border-radius: 4px;
+  background-color: #2d3795;
+  position: relative;
+}
+
+.bot-wrapper .bot-body .bot-bubble.bot-message .content::after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: -10px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 15px 25px 0;
+  border-color: transparent #2d3795 transparent transparent;
+}
+
+.bot-wrapper .bot-body .bot-bubble.bot-request {
+  text-align: right;
+  float: right;
+  clear: both;
+}
+
+.bot-wrapper .bot-body .bot-bubble.bot-request .content {
+  margin-top: 10px;
+  margin-right: 15px;
+  padding: 10px 15px;
+  border-radius: 4px;
+  background-color: #ed2129;
+  position: relative;
+}
+
+.bot-wrapper .bot-body .bot-bubble.bot-request .content::after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: -10px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 25px 15px 0 0;
+  border-color: #ed2129 transparent transparent transparent;
+}
+
+.bot-wrapper .bot-body .bot-cards {
+  border-radius: 5px;
+  padding: 10px;
+  width: 50%;
+  float: left;
+  clear: both;
+  margin: 4px;
+}
+
+.bot-wrapper .bot-body .bot-cards button {
+  margin: 5px 0px;
+}
+
+.bot-wrapper .bot-body .bot-cards button:first-child {
+  margin-top: 0px;
+}
+
+.bot-wrapper .bot-body .bot-cards button:last-child {
+  margin-bottom: 0px;
+}
+
+.bot-wrapper .bot-body .bot-image {
+  height: 40px;
+  width: 40px;
+}
+
+.bot-wrapper .bot-footer {
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
+  transition-delay: none;
+}
+
+.bot-wrapper .bot-footer input {
+  font-size: 1em;
+  width: 100%;
+  outline: none;
+  border: none;
+  background-color: #ffffff;
+  padding: 20px 10px;
+}
+
+.bot-wrapper .bot-footer input:disabled {
+  background: #ccc;
+}
+
+.bot-wrapper .bot-footer input::-webkit-input-placeholder {
+  color: #000;
+  font-style: italic;
+}
+
+.bot-wrapper .bot-footer input:-ms-input-placeholder {
+  color: #000;
+  font-style: italic;
+}
+
+.bot-wrapper .bot-footer input::-ms-input-placeholder {
+  color: #000;
+  font-style: italic;
+}
+
+.bot-wrapper .bot-footer input::placeholder {
+  color: #000;
+  font-style: italic;
+}
+
+.bot-wrapper.open {
+  z-index: 2;
+}
+
+.bot-wrapper.open .bot-header,
+.bot-wrapper.open .bot-body,
+.bot-wrapper.open .bot-footer {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+  transition-delay: 0.5s;
+}
+

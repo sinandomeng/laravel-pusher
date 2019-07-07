@@ -20,7 +20,7 @@
         var lexRuntime = new AWS.LexRuntime()
         var lexUserId = 'chatbot-demo' + Date.now()
         var sessionAttributes = {}
-        var conversationDiv = $('.cb-body')
+        var conversationDiv = $('.bot-body')
     
         function pushChat() {
             // text/chat source
@@ -31,7 +31,6 @@
                 // disable input to show we're sending it
                 var userText = wisdomText.value.trim()
                 wisdomText.value = '...'
-                wisdomText.locked = true
     
                 showRequest(userText)
     
@@ -61,7 +60,6 @@
     
                     // re-enable input
                     wisdomText.value = ''
-                    wisdomText.locked = false
                 })
             }
     
@@ -71,21 +69,22 @@
     
         function showRequest(lexRequest) {
             var requestPara = `
-                <div class="lex-bubble lex-request">
+                <div class="bot-bubble bot-request">
                     <div class="content">
                         ${lexRequest}
                     </div>
-                    <img src='https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn0.iconfinder.com%2Fdata%2Ficons%2Favatars-8%2F128%2Favatar-23-2-512.png&f=1' />
+                    <img class="bot-image" src="${BASE_URL}/vendor/filipay/img/user-icon.png" />
                 </div>
             `
+
             conversationDiv.append(requestPara)
             conversationDiv.animate({ scrollTop: conversationDiv.prop( 'scrollHeight' )}, 800 )
         }
     
         function showResponse(lexMessage) {
             var responsePara = `
-                <div class="lex-bubble lex-message">
-                    <img src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.pixabay.com%2Fphoto%2F2017%2F10%2F24%2F00%2F39%2Fbot-icon-2883144__340.png&f=1" />
+                <div class="bot-bubble bot-message">
+                    <img class="bot-image" src="${BASE_URL}/vendor/filipay/img/bot-icon.png" />
                     <div class="content">
                         ${lexMessage.message}
                     </div>
@@ -104,7 +103,7 @@
         }
     
         function showError(daText) {
-            var errorPara = '<div class="lex-bubble lex-error">' + daText + '</div>'
+            var errorPara = `<div class="bot-bubble bot-error">${daText}</div>`
 
             conversationDiv.append(errorPara)
             conversationDiv.animate({ scrollTop: conversationDiv.prop( 'scrollHeight' )}, 800 )
@@ -113,19 +112,17 @@
 
     // dom ready ...
     $(function () {
+
         chatbot_init()
 
-        $('.cb-toggler').click(function (e) {
-            if (e.target !== this) {
-                return true;
-            } else {
-                $(this).addClass('open')
-            }
+        var toggler = $('.bot-toggler')
+        var wrapper = $('.bot-wrapper')
+
+        $('.bot-toggler, .bot-close').click(function () {
+            toggler.toggleClass('open')
+            wrapper.toggleClass('open')
         })
 
-        $('.cb-close').click(function () {
-            $('.cb-toggler').removeClass('open')
-        })
     })
 
 })( jQuery )

@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Notification;
 */
 
 Route::get('/', function () {
-    return view('filipay');
+    return view('filipay.index');
 });
 
 Route::get('/pusher', function () {
@@ -30,8 +30,7 @@ Route::get('/portfolio', function () {
 });
 
 Route::prefix('admin')->group(function () {
-    Route::get('/', function () { return view('admin.dashboard'); });
-    // Route::get('/', function () { });
+    Route::get('/', function () { return view('sb-admin.dashboard'); });
 });
 
 Route::get('/status-liked', function (Faker $faker) {
