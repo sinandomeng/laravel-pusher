@@ -214,7 +214,7 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-                <h1>Tables Page</h1>
+                <h1>404 Page</h1>
             </div>
         </div>
 
