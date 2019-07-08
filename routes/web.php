@@ -17,28 +17,13 @@ use Illuminate\Support\Facades\Notification;
 |
 */
 
-Route::get('/', function () {
-    return view('filipay.index');
-});
-
-Route::get('/pusher', function () {
-    return view('pusher');
-});
+Route::get('/',              'FiliPayController@index');
 
 Route::get('/portfolio', function () {
     return view('portfolio.index');
 });
 
-Route::prefix('admin')->group(function () {
-    Route::get('/', function () { return view('sb-admin.dashboard'); });
-});
+Route::get('/sb-admin',      'SBAdminController@index');
 
-Route::get('/status-liked', function (Faker $faker) {
-    // send real-time notification
-    event(new StatusLikingEvent($faker->firstName));
-
-    // send email notification
-    Notification::send(User::find(1), new StatusLikingNotif());
-
-    return view('event-launched');
-});
+Route::get('/pusher',        'PusherController@index');
+Route::get('/pusher/notify', 'PusherController@notify');
