@@ -6,8 +6,12 @@ body {
 }
 
 body {
-    // background-image: linear-gradient(-128deg, rgba(255, 181, 32, 0.93) 3%, rgba(239, 39, 153, 0.93) 88%, rgba(237, 18, 171, 0.93) 100%);
-    background: url('../../public/vendor/filipay/img/dashboard-bg.png') center center no-repeat;
+    background-image: linear-gradient(-128deg, rgba(255, 181, 32, 0.93) 3%, rgba(239, 39, 153, 0.93) 88%, rgba(237, 18, 171, 0.93) 100%);
+
+    // background-image: url('../img/dashboard-bg.png');
+    // background-position: center center;
+    // background-repeat: no-repeat;
+
     width: 100%;
     height: 100%;
 }
@@ -23,22 +27,21 @@ body {
     max-width: 80px;
     max-height: 80px;
 
-    background-color: #f5f5f5;
     border-radius: 100%;
-
     transition: all 300ms ease-in-out;
 
     &.open {
         border-radius: 10px !important;
     
         max-width: 400px;
-        max-height: 800px;
+        max-height: 730px;
     }
 }
 
 .bot-toggler {
     cursor: pointer;
     z-index: 2;
+    background-color: #1cbbb4;
 
     &.open {
         z-index: 1;
@@ -76,8 +79,8 @@ body {
         .bot-heading {
             color: #ffffff;
 
-            .bot-title { margin-bottom: 5px; }
-            .bot-sub-title { font-size: 12px; margin-bottom: 0px; }
+            .bot-title { font-size: 18px; margin-bottom: 0px; }
+            .bot-sub-title { font-size: 11px; margin-bottom: 0px; }
         }
 
         .bot-close {
@@ -85,8 +88,7 @@ body {
             position: absolute;
             top: 15px;
             right: 15px;
-            color: #ffffff;
-            font-size: 25px;
+            color: #06a79f;
         }
     }
 
@@ -103,22 +105,48 @@ body {
 
         .bot-bubble {
             margin: 4px;
-            max-width: 75%;
+            width: 100%;
             color: #ffffff;
-            display: flex;
-            align-items: flex-start;
+
+            &.bot-request {
+                display: flex;
+                padding-left: 20%;
+
+                .bot-content {
+                    width: 100%;
+                    border-radius: 4px;
+                    background-color: #ed2129;
+                    margin-top: 10px;
+                    margin-right: 15px;
+                    padding: 10px 15px;
+                    position: relative;
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        top: 0px;
+                        right: -10px;
+
+                        width: 0;
+                        height: 0;
+                        border-style: solid;
+                        border-width: 25px 15px 0 0;
+                        border-color: #ed2129 transparent transparent transparent;
+                    }
+                }
+            }
             
             &.bot-message {
-                text-align: left;
-                float: left;
-                clear: both;
+                display: flex;
+                padding-right: 20%;
 
-                .content {
+                .bot-content {
+                    width: 100%;
+                    border-radius: 4px;
+                    background-color: #2d3795;
                     margin-top: 10px;
                     margin-left: 15px;
                     padding: 10px 15px;
-                    border-radius: 4px;
-                    background-color: #2d3795;
                     position: relative;
 
                     &::after {
@@ -135,33 +163,16 @@ body {
                     }
                 }
             }
+        }
 
-            &.bot-request {
-                text-align: right;
-                float: right;
-                clear: both;
+        .bot-image {
+            height: 40px;
+            width: 40px;
 
-                .content {
-                    margin-top: 10px;
-                    margin-right: 15px;
-                    padding: 10px 15px;
-                    border-radius: 4px;
-                    background-color: #ed2129;
-                    position: relative;
-
-                    &::after {
-                        content: '';
-                        position: absolute;
-                        top: 0px;
-                        right: -10px;
-
-                        width: 0;
-                        height: 0;
-                        border-style: solid;
-                        border-width: 25px 15px 0 0;
-                        border-color: #ed2129 transparent transparent transparent;
-                    }
-                }
+            img {
+                height: 40px;
+                width: 40px;
+                border-radius: 100%;
             }
         }
 
@@ -180,25 +191,21 @@ body {
                 &:last-child { margin-bottom: 0px; }
             }
         }
-
-        .bot-image {
-            height: 40px;
-            width: 40px;
-        }
     }
 
     .bot-footer {
         opacity: 0;
         transition: opacity 0.1s ease-in-out;
-        transition-delay: none;
+        transition-delay: 0s;
+        position: relative;
 
-        input {
+        #bot-input {
             font-size: 1em;
             width: 100%;
             outline: none;
             border: none;
             background-color: #ffffff;
-            padding: 20px 10px;
+            padding: 20px 95px 20px 10px;
 
             &:disabled {
                 background: #ccc;
@@ -207,6 +214,26 @@ body {
             &::placeholder {
                 color: #000;
                 font-style: italic;
+            }
+        }
+
+        #bot-action {
+            position: absolute;
+            height: auto;
+            width: auto;
+            top: 10px;
+            right: 10px;
+            background-color: #1cbbb4;
+            color: #ffffff;
+            text-transform: uppercase;
+            outline: none;
+            border: 0;
+            padding: 10px 20px;
+            border-radius: 5px;
+
+            &:disabled {
+                background-color: #0f908a;
+                color: #d1d1d1;
             }
         }
     }
@@ -220,6 +247,20 @@ body {
             opacity: 1;
             transition: opacity 0.5s ease-in-out;
             transition-delay: 0.5s;
+        }
+    }
+}
+
+@media (max-width: 440px) {
+    .bot-toggler,
+    .bot-wrapper {
+        &.open {
+            right: 0;
+            bottom: 0;
+
+            border-radius: 0 !important;
+            max-height: 100%;
+            max-width: 100%;
         }
     }
 }

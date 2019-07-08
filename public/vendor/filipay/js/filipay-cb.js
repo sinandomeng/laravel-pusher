@@ -1,13 +1,17 @@
 (function ( $ ) {
 
     function chatbot_init() {
+        var userInput = $('#bot-input')
+        var userButton = $('#bot-action')
+
         // set the focus to the input box
-        $('#wisdom').focus()
+        userInput.focus()
     
         // chat form on submit handler
         $('#chat-form').on('submit', function (e) {
             e.preventDefault()
-            $('#wisdom').prop('disabled', true)
+            userInput.prop('disabled', true)
+            userButton.prop('disabled', true)
             pushChat()
         })
     
@@ -23,29 +27,27 @@
         var conversationDiv = $('.bot-body')
     
         function pushChat() {
-            // text/chat source
-            var wisdomText = document.getElementById('wisdom')
-    
             // if there is text to be sent...
-            if (wisdomText && wisdomText.value && wisdomText.value.trim().length > 0) {
+            if (userInput.val() && userInput.val().trim().length > 0) {
                 // disable input to show we're sending it
-                var userText = wisdomText.value.trim()
-                wisdomText.value = '...'
+                var userText = userInput.val().trim()
+                userInput.val('...') 
     
                 showRequest(userText)
     
                 // send it to the Lex runtime
                 var params = {
                     botAlias: '$LATEST',
-                    botName: 'GreyhoundBot',
+                    botName: 'FiliPayGlobal',
                     inputText: userText,
                     userId: lexUserId,
                     sessionAttributes: sessionAttributes
                 }
     
                 lexRuntime.postText(params, function (err, data) {
-                    $('#wisdom').prop('disabled', false)
-    
+                    userInput.prop('disabled', false)
+                    userButton.prop('disabled', false)
+
                     if (err) {
                         console.log(err, err.stack)
                         showError('Error:  ' + err.message + ' (see console for details)')
@@ -59,21 +61,19 @@
                     }
     
                     // re-enable input
-                    wisdomText.value = ''
+                    userInput.val('')
                 })
+            } else {
+                userInput.prop('disabled', false)
+                userButton.prop('disabled', false)
             }
-    
-            // we always cancel form submission
-            return false
         }
     
         function showRequest(lexRequest) {
             var requestPara = `
                 <div class="bot-bubble bot-request">
-                    <div class="content">
-                        ${lexRequest}
-                    </div>
-                    <img class="bot-image" src="${BASE_URL}/vendor/filipay/img/user-icon.png" />
+                    <div class="bot-content"> ${lexRequest} </div>
+                    <div class="bot-image"> <img src="${AUTH_USER.avatar_user}" width="40px" height="40px" /> </div>
                 </div>
             `
 
@@ -82,12 +82,21 @@
         }
     
         function showResponse(lexMessage) {
+            var message = lexMessage.message
+
+            var replaceChars = {
+                'BASE_URL': BASE_URL,
+                'USER_ID': AUTH_USER.id
+            }
+      
+            var newLexMessage = message.replace(/BASE_URL|USER_ID/gi, function(match) {
+                return replaceChars[match]
+            } )
+
             var responsePara = `
                 <div class="bot-bubble bot-message">
-                    <img class="bot-image" src="${BASE_URL}/vendor/filipay/img/bot-icon.png" />
-                    <div class="content">
-                        ${lexMessage.message}
-                    </div>
+                    <div class="bot-image"> <img src="${AUTH_USER.avatar_bot}" width="40px" height="40px" /> </div>
+                    <div class="bot-content"> ${newLexMessage} </div>
                 </div>
             `
     
@@ -99,11 +108,16 @@
             conversationDiv.animate({ scrollTop: conversationDiv.prop( 'scrollHeight' )}, 800 )
     
             // set the focus to the input box
-            $('#wisdom').focus()
+            userInput.focus()
         }
     
         function showError(daText) {
-            var errorPara = `<div class="bot-bubble bot-error">${daText}</div>`
+            var errorPara = `
+                <div class="bot-bubble bot-message">
+                    <div class="bot-image"> <img src="${AUTH_USER.avatar_bot}" width="40px" height="40px" /> </div>
+                    <div class="bot-content"> ${daText} </div>
+                </div>
+            `
 
             conversationDiv.append(errorPara)
             conversationDiv.animate({ scrollTop: conversationDiv.prop( 'scrollHeight' )}, 800 )

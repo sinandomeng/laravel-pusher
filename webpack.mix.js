@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-// var LiveReloadPlugin = require('webpack-livereload-plugin');
+var LiveReloadPlugin = require('webpack-livereload-plugin');
 
 /*
  |--------------------------------------------------------------------------
@@ -13,9 +13,12 @@ const mix = require('laravel-mix');
  */
 
 mix
-    // .webpackConfig({
-    //     plugins: [
-    //         new LiveReloadPlugin()
-    //     ]
-    // })
-    .sass('resources/sass/filipay-cb.scss', 'public/vendor/filipay/css');
+    .webpackConfig({
+        plugins: [
+            new LiveReloadPlugin()
+        ]
+    })
+    .sass('resources/sass/filipay-cb.scss', 'public/vendor/filipay/css')
+    .options({
+        processCssUrls: false
+    });

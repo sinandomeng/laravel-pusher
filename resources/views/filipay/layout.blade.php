@@ -6,16 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
     <title>FiliPay Global Chatbot</title>
 
     <!-- Bootstrap -->
-    <link href="{{ url('vendor/filipay/css/bootstrap.min.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ url('vendor/filipay/css/bootstrap.min.css') }}" />
+    
     <!-- AWS SDK -->
     <script src="{{ url('vendor/filipay/js/aws-sdk-2.41.0.min.js') }}"></script>
-
+    
     <!-- Additional or Custom Stylesheet -->
-    <link href="{{ url('vendor/filipay/css/filipay-cb.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url('vendor/filipay/css/filipay-cb.css') }}" />
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,12 +41,18 @@
 
     <!-- LiveReload for development only -->
     @if (env('APP_ENV') == 'local')
-        <!-- <script src="http://localhost:35729/livereload.js"></script> -->
+        <script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
     @endif
 
     <!-- Global and Important Declarations -->
     <script type="text/javascript">
         const BASE_URL = '{{ url('/') }}'
+        const AUTH_USER = {
+            id: '1',
+            name: 'Admin',
+            avatar_bot: BASE_URL + '/vendor/filipay/img/bot-icon.png',
+            avatar_user: BASE_URL + '/vendor/filipay/img/user-icon.png',
+        }
     </script>
 
     <!-- Additional or Custom Javascript -->
