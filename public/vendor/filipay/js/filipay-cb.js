@@ -73,7 +73,7 @@
             var requestPara = `
                 <div class="bot-bubble bot-request">
                     <div class="bot-content"> ${lexRequest} </div>
-                    <div class="bot-image"> <img src="${AUTH_USER.avatar_user}" width="40px" height="40px" /> </div>
+                    <div class="bot-image"> <img src="${auth_user.avatar_user}" width="40px" height="40px" onerror="this.src='${auth_user.avatar_default}'" /> </div>
                 </div>
             `
 

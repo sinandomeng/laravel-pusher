@@ -52,6 +52,7 @@
             name: 'Admin',
             avatar_bot: BASE_URL + '/vendor/filipay/img/bot-icon.png',
             avatar_user: BASE_URL + '/vendor/filipay/img/user-icon.png',
+            avatar_default: BASE_URL + '/vendor/filipay/img/user-icon.png'
         }
     </script>
 
