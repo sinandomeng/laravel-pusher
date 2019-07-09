@@ -40,17 +40,30 @@ body {
 
 .bot-toggler {
     cursor: pointer;
-    z-index: 2;
+    z-index: 2000;
     background-color: #1cbbb4;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        height: auto;
+        width: 55%;
+    }
+
     &.open {
-        z-index: 1;
+        z-index: 1000;
+
+        img {
+            opacity: 0;
+        }
     }
 }
 
 .bot-wrapper {
     cursor: default;
-    z-index: 1;
+    z-index: 1000;
 
     box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.25);
 
@@ -100,25 +113,26 @@ body {
         width: 100%;
         height: 100%;
         background-color: #eee;
-        padding: 10px;
+        padding: 10px 15px;
         overflow-y: auto;
 
         .bot-bubble {
-            margin: 4px;
-            width: 100%;
             color: #ffffff;
+            margin: 10px 0px;
+            width: 100%;
 
             &.bot-request {
                 display: flex;
                 padding-left: 20%;
+                justify-content: flex-end;
 
                 .bot-content {
-                    width: 100%;
+                    width: auto;
                     border-radius: 4px;
                     background-color: #ed2129;
                     margin-top: 10px;
                     margin-right: 15px;
-                    padding: 10px 15px;
+                    padding: 15px;
                     position: relative;
 
                     &::after {
@@ -139,14 +153,15 @@ body {
             &.bot-message {
                 display: flex;
                 padding-right: 20%;
+                justify-content: flex-start;
 
                 .bot-content {
-                    width: 100%;
+                    width: auto;
                     border-radius: 4px;
                     background-color: #2d3795;
                     margin-top: 10px;
                     margin-left: 15px;
-                    padding: 10px 15px;
+                    padding: 15px;
                     position: relative;
 
                     &::after {
@@ -239,7 +254,7 @@ body {
     }
 
     &.open {
-        z-index: 2;
+        z-index: 2000;
 
         .bot-header,
         .bot-body,

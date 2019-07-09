@@ -86,10 +86,11 @@
 
             var replaceChars = {
                 'BASE_URL': BASE_URL,
+                'USER_NAME': AUTH_USER.name,
                 'USER_ID': AUTH_USER.id
             }
       
-            var newLexMessage = message.replace(/BASE_URL|USER_ID/gi, function(match) {
+            var newLexMessage = message.replace(/BASE_URL|USER_NAME|USER_ID/gi, function(match) {
                 return replaceChars[match]
             } )
 
