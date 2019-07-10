@@ -10,13 +10,13 @@
     <title>FiliPay Global Chatbot</title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="{{ url('vendor/filipay/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('vendor/filipay/css/bootstrap.min.css') }}" />
     
     <!-- AWS SDK -->
-    <script src="{{ url('vendor/filipay/js/aws-sdk-2.41.0.min.js') }}"></script>
+    <script src="{{ asset('vendor/filipay/js/aws-sdk-2.41.0.min.js') }}"></script>
     
     <!-- Additional or Custom Stylesheet -->
-    <link rel="stylesheet" href="{{ url('vendor/filipay/css/filipay-cb.css') }}" />
+    <link rel="stylesheet" href="{{ asset('vendor/filipay/css/chatbot.css') }}" />
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -34,10 +34,10 @@
     @yield('content')
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script type="text/javascript" src="{{ url('js/jquery-3.3.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script type="text/javascript" src="{{ url('vendor/filipay/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('vendor/filipay/js/bootstrap.min.js') }}"></script>
 
     <!-- LiveReload for development only -->
     @if (env('APP_ENV') == 'local')
@@ -56,8 +56,14 @@
         }
     </script>
 
-    <!-- Additional or Custom Javascript -->
-    <script type="text/javascript" src="{{ url('vendor/filipay/js/filipay-cb.js') }}"></script>
+    <!-- Chatbot Script -->
+    <script type="text/javascript" src="{{ asset('vendor/filipay/js/chatbot.js?ver=' . time() ) }}"></script>
+
+    <!-- Plugin Script -->
+    <script type="text/javascript" src="{{ asset('vendor/filipay/js/plugin.js?ver=' . time() ) }}"></script>
+
+    <!-- Additional Script -->
+    <script type="text/javascript" src="{{ asset('vendor/filipay/js/script.js?ver=' . time() ) }}"></script>
 
 </body>
 

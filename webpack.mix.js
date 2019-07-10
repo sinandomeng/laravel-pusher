@@ -18,7 +18,7 @@ mix
             new LiveReloadPlugin()
         ]
     })
-    .sass('resources/sass/filipay-cb.scss', 'public/vendor/filipay/css')
+    .sass('resources/sass/chatbot.scss', 'public/vendor/filipay/css')
     .options({
         processCssUrls: false
     });
