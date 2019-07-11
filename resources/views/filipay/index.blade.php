@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="chatbot-wrapper">
+    <!-- <div class="chatbot-wrapper">
         <div class="bot-toggler">
             <img src="{{ asset('/vendor/filipay/img/chat-icon.png') }}" alt="Chat Icon" />
         </div>
@@ -56,6 +56,6 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> -->
 
 @endsection

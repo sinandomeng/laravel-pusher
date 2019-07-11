@@ -1,5 +1,13 @@
 (function ($) {
 
+    const AUTH_USER = {
+        id: '1',
+        name: 'Admin',
+        avatar_bot:  BASE_URL + '/vendor/filipay/img/bot-icon.png',
+        avatar_user: BASE_URL + '/vendor/filipay/img/user-icon.png',
+        avatar_chat: BASE_URL + '/vendor/filipay/img/chat-icon.png',
+    }
+
     function chatbot_init() {
         var userInput = $('#bot-input')
         var userButton = $('#bot-action')

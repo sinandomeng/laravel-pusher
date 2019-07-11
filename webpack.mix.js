@@ -19,6 +19,7 @@ mix
         ]
     })
     .sass('resources/sass/chatbot.scss', 'public/vendor/filipay/css')
+    .scripts(['resources/js/plugin.js'], 'public/vendor/filipay/js/plugin.js')
     .options({
         processCssUrls: false
     });

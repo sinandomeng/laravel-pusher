@@ -14,6 +14,26 @@
     
     <!-- AWS SDK -->
     <script src="{{ asset('vendor/filipay/js/aws-sdk-2.41.0.min.js') }}"></script>
+
+    <style type="text/css">
+        html,
+        body {
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body {
+            background-image: linear-gradient(-128deg, rgba(255, 181, 32, 0.93) 3%, rgba(239, 39, 153, 0.93) 88%, rgba(237, 18, 171, 0.93) 100%);
+
+            /* background-image: url('../img/dashboard-bg.png'); */
+            /* background-position: center center; */
+            /* background-repeat: no-repeat; */
+
+            width: 100%;
+            height: 100%;
+        }
+    </style>
     
     <!-- Additional or Custom Stylesheet -->
     <link rel="stylesheet" href="{{ asset('vendor/filipay/css/chatbot.css') }}" />
@@ -44,23 +64,13 @@
         <script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
     @endif
 
+    <!-- Chatbot Script -->
+    <script type="text/javascript" src="{{ asset('vendor/filipay/js/plugin.js?ver=' . time() ) }}"></script>
+
     <!-- Global and Important Declarations -->
     <script type="text/javascript">
         const BASE_URL = '{{ url('/') }}'
-        const AUTH_USER = {
-            id: '1',
-            name: 'Admin',
-            avatar_bot: BASE_URL + '/vendor/filipay/img/bot-icon.png',
-            avatar_user: BASE_URL + '/vendor/filipay/img/user-icon.png',
-            avatar_default: BASE_URL + '/vendor/filipay/img/user-icon.png'
-        }
     </script>
-
-    <!-- Chatbot Script -->
-    <script type="text/javascript" src="{{ asset('vendor/filipay/js/chatbot.js?ver=' . time() ) }}"></script>
-
-    <!-- Plugin Script -->
-    <script type="text/javascript" src="{{ asset('vendor/filipay/js/plugin.js?ver=' . time() ) }}"></script>
 
     <!-- Additional Script -->
     <script type="text/javascript" src="{{ asset('vendor/filipay/js/script.js?ver=' . time() ) }}"></script>
