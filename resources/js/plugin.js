@@ -1,45 +1,46 @@
-(function (w, d, $) {
+/**
+ * @package Chatbot Script
+ * @author Alfredo Flores
+ * @email alfredo@xerosoft.com
+ * @version 1.0
+ */
+
+(function (window, document, $) {
 
     'use strict'
 
-    // default d.write is throwing an issue
+    let PARAMS
+
+    // default document.write is throwing an issue
     // read here: https://stackoverflow.com/a/19757717
-    d.write = function (html) {
-        var scripts = d.getElementsByTagName("script")
+    document.write = function (html) {
+        var scripts = document.getElementsByTagName("script")
         var lastScript = scripts[scripts.length - 1]
 
         lastScript.insertAdjacentHTML("beforebegin", html)
     }
-    
+
     function defineChatbot() {
         var Chatbot = {}
 
         Chatbot.init = function () {
-            if (arguments[0] !== "undefined" && typeof arguments[0] === "object") {
+            PARAMS = arguments[0]
+
+            if (typeof PARAMS !== "undefined" && typeof PARAMS === "object") {
+                initBotUI()
                 initEventHandler()
-                initBotUI(arguments[0])
-                initBotConfigs(arguments[0])
+                initBotConfigs()
             } else {
-                throw Error("Chatbot: Invalid arguments supplied.")
+                throw Error("Invalid parameters supplied. Check the README file for proper configuration.")
             }
         }
 
         return Chatbot
     }
 
-    // function for handling event handlers such as opening and closing the chatbot
-    function initEventHandler() {
-        $(d).on("click", ".bot-toggler, .bot-close", function () {
-            $(".bot-toggler").toggleClass('open')
-            $(".bot-wrapper").toggleClass('open')
-        })
-    }
-
     // function that is responsible for displaying the UI of the chatbot
     function initBotUI() {
-        const PARAMS = arguments[0]
-
-        d.write(`
+        document.write(`
             <div class="chatbot-wrapper">
                 <div class="bot-toggler">
                     <img src="${PARAMS.imgChat}" alt="Chat Icon" />
@@ -68,7 +69,7 @@
 
                     <div class="bot-footer">
                         <form id="chat-form" autocomplete="off">
-                            <input type="text" id="bot-input" size="80" value="" placeholder="Ask something..." />
+                            <input type="text" id="bot-input" size="80" value="Greetings!" placeholder="Ask something..." />
                             <button type="submit" id="bot-action">Send</button>
                         </form>
                     </div>
@@ -77,10 +78,16 @@
         `)
     }
 
+    // function for handling event handlers such as opening and closing the chatbot
+    function initEventHandler() {
+        $(document).on("click", ".bot-toggler, .bot-close", function () {
+            $(".bot-toggler").toggleClass('open')
+            $(".bot-wrapper").toggleClass('open')
+        })
+    }
+
     // function where configuration files for the bot are being declared
     function initBotConfigs() {
-        const PARAMS = arguments[0]
-
         var userInput = $('#bot-input')
         var userButton = $('#bot-action')
 
@@ -98,11 +105,12 @@
             IdentityPoolId: PARAMS.configKeys.identityPoolId
         })
 
-        var lexRuntime = new AWS.LexRuntime()
-        var lexUserId = 'chatbot-demo' + Date.now()
-        var sessionAttributes = {}
-        var conversationDiv = $('.bot-body')
+        let lexRuntime = new AWS.LexRuntime()
+        let lexUserId = PARAMS.name ? PARAMS.name.replace(' ', '-').toLowerCase() : 'chatbot-demo' + Date.now()
+        let sessionAttributes = {}
+        let conversationDiv = $('.bot-body')
 
+        // function responsible for chat's form submit handler
         function pushChat() {
             // if there is text to be sent...
             if (userInput.val() && userInput.val().trim().length > 0) {
@@ -146,11 +154,12 @@
             }
         }
 
+        // function that will display user input
         function showRequest(lexRequest) {
             var requestPara = `
                 <div class="bot-bubble bot-request">
                     <div class="bot-content"> ${lexRequest} </div>
-                    <div class="bot-image"> <img src="${PARAMS.imgUser}" width="40px" height="40px" onerror="this.src='${PARAMS.imgUser}'" /> </div>
+                    <div class="bot-image"> <img src="${PARAMS.imgUser}" width="40px" height="40px" onerror="this.src='${PARAMS.baseUrl}/images/admin/blank-profile-image.jpg'" /> </div>
                 </div>
             `
 
@@ -158,13 +167,14 @@
             conversationDiv.animate({ scrollTop: conversationDiv.prop('scrollHeight') }, 800)
         }
 
+        // function that will display bot response
         function showResponse(lexMessage) {
             var message = lexMessage.message
 
             var replaceChars = {
-                'BASE_URL':  PARAMS.baseUrl,
+                'BASE_URL': PARAMS.baseUrl,
                 'USER_NAME': PARAMS.name,
-                'USER_ID':   PARAMS.id
+                'USER_ID': PARAMS.id
             }
 
             var newLexMessage = message.replace(/BASE_URL|USER_NAME|USER_ID/gi, function (match) {
@@ -189,11 +199,12 @@
             userInput.focus()
         }
 
-        function showError(daText) {
+        // function that will display if any error found
+        function showError(lexErrorMessage) {
             var errorPara = `
                 <div class="bot-bubble bot-message">
                     <div class="bot-image"> <img src="${PARAMS.imgBot}" width="40px" height="40px" /> </div>
-                    <div class="bot-content"> ${daText} </div>
+                    <div class="bot-content"> ${lexErrorMessage} </div>
                 </div>
             `
 
@@ -203,7 +214,7 @@
     }
 
     if (typeof (Chatbot) === "undefined") {
-        w.Chatbot = defineChatbot()
+        window.Chatbot = defineChatbot()
     }
 
 }(window, document, jQuery))
